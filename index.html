@@ -1,0 +1,1214 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="TechStore — Eletrônicos com os melhores preços"
+    />
+    <title>TechStore | Eletrônicos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --cor-primaria: #2563eb;
+        --cor-primaria-hover: #1d4ed8;
+        --cor-acento: #f59e0b;
+        --cor-fundo: #f8fafc;
+        --cor-fundo-card: #ffffff;
+        --cor-texto: #1e293b;
+        --cor-texto-suave: #64748b;
+        --cor-borda: #e2e8f0;
+        --sombra-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+        --sombra-hover: 0 8px 24px rgba(37, 99, 235, 0.15);
+        --raio: 12px;
+        --transicao: 0.25s ease;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--cor-fundo);
+        color: var(--cor-texto);
+        line-height: 1.6;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /* HEADER */
+      header {
+        background: #fff;
+        border-bottom: 1px solid var(--cor-borda);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: box-shadow var(--transicao);
+      }
+      header.scrolled {
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+      }
+      .header-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      .logo {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.5rem;
+        color: var(--cor-primaria);
+        white-space: nowrap;
+      }
+      .logo span {
+        color: var(--cor-acento);
+      }
+
+      .busca {
+        flex: 1;
+        max-width: 560px;
+        position: relative;
+      }
+      .busca input {
+        width: 100%;
+        padding: 0.6rem 3rem 0.6rem 1rem;
+        border: 1.5px solid var(--cor-borda);
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-family: "Inter", sans-serif;
+        background: var(--cor-fundo);
+        transition:
+          border-color var(--transicao),
+          box-shadow var(--transicao);
+        outline: none;
+      }
+      .busca input:focus {
+        border-color: var(--cor-primaria);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      }
+      .busca button {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--cor-texto-suave);
+        font-size: 1.1rem;
+        transition: color var(--transicao);
+      }
+      .busca button:hover {
+        color: var(--cor-primaria);
+      }
+
+      .sugestoes {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        right: 0;
+        background: #fff;
+        border: 1px solid var(--cor-borda);
+        border-radius: 8px;
+        box-shadow: var(--sombra-card);
+        display: none;
+        z-index: 200;
+      }
+      .sugestoes.visivel {
+        display: block;
+      }
+      .sugestoes li {
+        padding: 0.65rem 1rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background var(--transicao);
+      }
+      .sugestoes li:hover {
+        background: var(--cor-fundo);
+        color: var(--cor-primaria);
+      }
+
+      .header-acoes {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-left: auto;
+      }
+      .btn-carrinho {
+        position: relative;
+        background: var(--cor-primaria);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.55rem 1.1rem;
+        font-size: 0.9rem;
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition:
+          background var(--transicao),
+          transform var(--transicao);
+      }
+      .btn-carrinho:hover {
+        background: var(--cor-primaria-hover);
+        transform: translateY(-1px);
+      }
+      .badge-carrinho {
+        position: absolute;
+        top: -7px;
+        right: -7px;
+        background: var(--cor-acento);
+        color: #fff;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .badge-carrinho.animar {
+        transform: scale(1.5);
+      }
+
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.3rem;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .menu-toggle span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--cor-texto);
+        border-radius: 2px;
+        transition:
+          transform var(--transicao),
+          opacity var(--transicao);
+      }
+
+      /* NAV */
+      nav {
+        background: var(--cor-primaria);
+      }
+      .nav-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+      }
+      nav a {
+        color: rgba(255, 255, 255, 0.88);
+        padding: 0.65rem 1.1rem;
+        font-size: 0.88rem;
+        font-weight: 500;
+        transition:
+          background var(--transicao),
+          color var(--transicao);
+      }
+      nav a:hover,
+      nav a.ativo {
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+      }
+
+      /* HERO */
+      .hero {
+        background: linear-gradient(
+          135deg,
+          #1e3a8a 0%,
+          #2563eb 60%,
+          #3b82f6 100%
+        );
+        color: #fff;
+        padding: 4rem 1.5rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 50%;
+        top: -200px;
+        right: -150px;
+        pointer-events: none;
+      }
+      .hero-inner {
+        max-width: 680px;
+        margin: 0 auto;
+        position: relative;
+      }
+      .hero-badge {
+        display: inline-block;
+        background: rgba(245, 158, 11, 0.2);
+        color: var(--cor-acento);
+        border: 1px solid rgba(245, 158, 11, 0.4);
+        border-radius: 50px;
+        padding: 0.3rem 0.9rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 1rem;
+      }
+      .hero h1 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        line-height: 1.15;
+        margin-bottom: 1rem;
+      }
+      .hero p {
+        font-size: 1.05rem;
+        color: rgba(255, 255, 255, 0.82);
+        margin-bottom: 2rem;
+      }
+      .hero-btns {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn-hero {
+        padding: 0.8rem 2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        font-family: "Inter", sans-serif;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all var(--transicao);
+      }
+      .btn-hero-primario {
+        background: var(--cor-acento);
+        color: #fff;
+      }
+      .btn-hero-primario:hover {
+        background: #d97706;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+      }
+      .btn-hero-secundario {
+        background: transparent;
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+      .btn-hero-secundario:hover {
+        border-color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .contador {
+        margin-top: 2.5rem;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .contador-label {
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .contador-nums {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .contador-item {
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        padding: 0.4rem 0.7rem;
+        text-align: center;
+        min-width: 52px;
+      }
+      .contador-item .num {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        line-height: 1;
+      }
+      .contador-item .leg {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* SEÇÕES */
+      .secao {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+      }
+      .secao-titulo {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .secao-titulo::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--cor-borda);
+      }
+
+      /* CATEGORIAS */
+      .categorias-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 1rem;
+      }
+      .categoria-card {
+        background: var(--cor-fundo-card);
+        border: 1px solid var(--cor-borda);
+        border-radius: var(--raio);
+        padding: 1.2rem 0.75rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all var(--transicao);
+      }
+      .categoria-card:hover {
+        border-color: var(--cor-primaria);
+        box-shadow: var(--sombra-hover);
+        transform: translateY(-3px);
+      }
+      .categoria-card .icone {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+      .categoria-card .nome {
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      /* PRODUTOS */
+      .produtos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1.25rem;
+      }
+      .produto-card {
+        background: var(--cor-fundo-card);
+        border: 1px solid var(--cor-borda);
+        border-radius: var(--raio);
+        overflow: hidden;
+        transition: all var(--transicao);
+        position: relative;
+      }
+      .produto-card:hover {
+        box-shadow: var(--sombra-hover);
+        transform: translateY(-4px);
+      }
+      .produto-badge {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        background: #ef4444;
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 0.2rem 0.55rem;
+        border-radius: 50px;
+      }
+      .produto-imagem {
+        background: #f1f5f9;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 180px;
+        font-size: 4rem;
+      }
+      .produto-info {
+        padding: 1rem;
+      }
+      .produto-nome {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .produto-avaliacao {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.8rem;
+        color: var(--cor-texto-suave);
+        margin-bottom: 0.6rem;
+      }
+      .estrelas {
+        color: var(--cor-acento);
+        letter-spacing: -1px;
+      }
+      .produto-preco-antigo {
+        font-size: 0.8rem;
+        color: var(--cor-texto-suave);
+        text-decoration: line-through;
+      }
+      .produto-preco {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.3rem;
+        color: var(--cor-primaria);
+        font-weight: 700;
+      }
+      .produto-parcelas {
+        font-size: 0.75rem;
+        color: var(--cor-texto-suave);
+        margin-bottom: 0.75rem;
+      }
+      .btn-adicionar {
+        width: 100%;
+        padding: 0.65rem;
+        background: var(--cor-primaria);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.88rem;
+        font-family: "Inter", sans-serif;
+        cursor: pointer;
+        transition:
+          background var(--transicao),
+          transform var(--transicao);
+      }
+      .btn-adicionar:hover {
+        background: var(--cor-primaria-hover);
+        transform: scale(1.02);
+      }
+      .btn-adicionar:active {
+        transform: scale(0.98);
+      }
+
+      /* FILTROS */
+      .filtros {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+      }
+      .filtro-btn {
+        padding: 0.4rem 1rem;
+        border: 1.5px solid var(--cor-borda);
+        border-radius: 50px;
+        background: #fff;
+        font-size: 0.85rem;
+        font-family: "Inter", sans-serif;
+        cursor: pointer;
+        transition: all var(--transicao);
+        color: var(--cor-texto-suave);
+        font-weight: 500;
+      }
+      .filtro-btn.ativo,
+      .filtro-btn:hover {
+        border-color: var(--cor-primaria);
+        color: var(--cor-primaria);
+        background: rgba(37, 99, 235, 0.06);
+      }
+
+      /* BANNER */
+      .banner-promo {
+        background: linear-gradient(135deg, #f59e0b, #ef4444);
+        color: #fff;
+        border-radius: var(--raio);
+        padding: 2.5rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        max-width: calc(1280px - 3rem);
+        margin: 0 auto;
+      }
+      .banner-promo h2 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.6rem;
+      }
+      .banner-promo p {
+        opacity: 0.9;
+        margin-top: 0.3rem;
+      }
+      .banner-promo .btn-banner {
+        padding: 0.75rem 1.75rem;
+        background: #fff;
+        color: #ef4444;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        white-space: nowrap;
+        transition:
+          transform var(--transicao),
+          box-shadow var(--transicao);
+      }
+      .banner-promo .btn-banner:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+      }
+
+      /* TOAST */
+      .toast {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        background: #1e293b;
+        color: #fff;
+        padding: 0.85rem 1.25rem;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        font-weight: 500;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        transform: translateY(80px);
+        opacity: 0;
+        transition:
+          transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+          opacity 0.3s ease;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .toast.visivel {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .toast-icone {
+        background: #22c55e;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+      }
+
+      /* FOOTER */
+      footer {
+        background: #1e293b;
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 4rem;
+      }
+      .footer-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 2rem;
+      }
+      .footer-col h3 {
+        color: #fff;
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+      .footer-col ul li {
+        margin-bottom: 0.5rem;
+      }
+      .footer-col ul li a {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.6);
+        transition: color var(--transicao);
+      }
+      .footer-col ul li a:hover {
+        color: #fff;
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        padding: 1.25rem 1.5rem;
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.45);
+      }
+
+      /* RESPONSIVO */
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: flex;
+        }
+        .busca {
+          display: none;
+          position: absolute;
+          top: 64px;
+          left: 0;
+          right: 0;
+          padding: 0.75rem 1rem;
+          background: #fff;
+          border-bottom: 1px solid var(--cor-borda);
+          max-width: 100%;
+          z-index: 900;
+        }
+        .busca.visivel {
+          display: block;
+        }
+        .nav-inner {
+          flex-direction: column;
+          display: none;
+        }
+        .nav-inner.visivel {
+          display: flex;
+        }
+        .hero {
+          padding: 2.5rem 1rem;
+        }
+        .banner-promo {
+          flex-direction: column;
+          text-align: center;
+        }
+        .header-acoes .btn-carrinho span:not(.badge-carrinho) {
+          display: none;
+        }
+      }
+      @media (max-width: 480px) {
+        .produtos-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .produto-imagem {
+          height: 130px;
+          font-size: 3rem;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header id="cabecalho">
+      <div class="header-inner">
+        <a href="#" class="logo">Tech<span>Store</span></a>
+        <div class="busca" id="busca">
+          <input
+            type="search"
+            id="campoBusca"
+            placeholder="Buscar produtos..."
+            autocomplete="off"
+            aria-label="Buscar produtos"
+            aria-expanded="false"
+            aria-controls="listaSugestoes"
+          />
+          <button aria-label="Pesquisar">&#128269;</button>
+          <ul class="sugestoes" id="listaSugestoes" role="listbox"></ul>
+        </div>
+        <div class="header-acoes">
+          <button
+            class="btn-carrinho"
+            id="btnCarrinho"
+            aria-label="Ver carrinho"
+          >
+            &#128722; <span>Carrinho</span>
+            <span class="badge-carrinho" id="badgeCarrinho" aria-live="polite"
+              >0</span
+            >
+          </button>
+          <button
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <nav aria-label="Categorias principais">
+      <div class="nav-inner" id="navInner">
+        <a href="#" class="ativo">Home</a>
+        <a href="#">Smartphones</a>
+        <a href="#">Notebooks</a>
+        <a href="#">TVs</a>
+        <a href="#">Áudio</a>
+        <a href="#">Câmeras</a>
+        <a href="#">Acessórios</a>
+        <a href="#">Ofertas</a>
+      </div>
+    </nav>
+
+    <section class="hero" aria-label="Promoção principal">
+      <div class="hero-inner">
+        <span class="hero-badge">&#128293; Oferta por tempo limitado</span>
+        <h1>Tecnologia com os melhores preços do Brasil</h1>
+        <p>
+          Smartphones, notebooks, TVs e muito mais. Frete grátis nas compras
+          acima de R$&nbsp;299.
+        </p>
+        <div class="hero-btns">
+          <button
+            class="btn-hero btn-hero-primario"
+            onclick="
+              document
+                .getElementById('produtos')
+                .scrollIntoView({ behavior: 'smooth' })
+            "
+          >
+            Ver Ofertas
+          </button>
+          <button class="btn-hero btn-hero-secundario">Conheça o app</button>
+        </div>
+        <div class="contador" aria-label="Tempo restante da promoção">
+          <span class="contador-label">Oferta encerra em:</span>
+          <div class="contador-nums">
+            <div class="contador-item">
+              <div class="num" id="ctHoras">00</div>
+              <div class="leg">horas</div>
+            </div>
+            <div class="contador-item">
+              <div class="num" id="ctMinutos">00</div>
+              <div class="leg">min</div>
+            </div>
+            <div class="contador-item">
+              <div class="num" id="ctSegundos">00</div>
+              <div class="leg">seg</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" aria-labelledby="titulo-categorias">
+      <h2 class="secao-titulo" id="titulo-categorias">Categorias</h2>
+      <div class="categorias-grid">
+        <div class="categoria-card" role="button" tabindex="0">
+          <span class="icone">&#128241;</span
+          ><span class="nome">Smartphones</span>
+        </div>
+        <div class="categoria-card" role="button" tabindex="0">
+          <span class="icone">&#128187;</span
+          ><span class="nome">Notebooks</span>
+        </div>
+        <div class="categoria-card" role="button" tabindex="0">
+          <span class="icone">&#128250;</span><span class="nome">TVs</span>
+        </div>
+        <div class="categoria-card" role="button" tabindex="0">
+          <span class="icone">&#127911;</span><span class="nome">Áudio</span>
+        </div>
+        <div class="categoria-card" role="button" tabindex="0">
+          <span class="icone">&#128247;</span><span class="nome">Câmeras</span>
+        </div>
+        <div class="categoria-card" role="button" tabindex="0">
+          <span class="icone">&#127918;</span><span class="nome">Games</span>
+        </div>
+        <div class="categoria-card" role="button" tabindex="0">
+          <span class="icone">&#8987;</span><span class="nome">Wearables</span>
+        </div>
+        <div class="categoria-card" role="button" tabindex="0">
+          <span class="icone">&#128268;</span
+          ><span class="nome">Acessórios</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" id="produtos" aria-labelledby="titulo-produtos">
+      <h2 class="secao-titulo" id="titulo-produtos">Produtos em Destaque</h2>
+      <div class="filtros" role="group" aria-label="Filtrar produtos">
+        <button class="filtro-btn ativo" data-filtro="todos">Todos</button>
+        <button class="filtro-btn" data-filtro="smartphones">
+          Smartphones
+        </button>
+        <button class="filtro-btn" data-filtro="notebooks">Notebooks</button>
+        <button class="filtro-btn" data-filtro="audio">Áudio</button>
+        <button class="filtro-btn" data-filtro="tvs">TVs</button>
+      </div>
+      <div class="produtos-grid" id="produtosGrid" aria-live="polite"></div>
+    </section>
+
+    <aside class="banner-promo" aria-label="Promoção especial">
+      <div>
+        <h2>&#127381; Semana do Consumidor</h2>
+        <p>Até 60% de desconto em produtos selecionados. Só essa semana!</p>
+      </div>
+      <button class="btn-banner">Aproveitar agora</button>
+    </aside>
+
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-col">
+          <h3>TechStore</h3>
+          <ul>
+            <li><a href="#">Sobre nós</a></li>
+            <li><a href="#">Trabalhe conosco</a></li>
+            <li><a href="#">Imprensa</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Atendimento</h3>
+          <ul>
+            <li><a href="#">Central de Ajuda</a></li>
+            <li><a href="#">Rastrear pedido</a></li>
+            <li><a href="#">Trocas e devoluções</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Pagamento</h3>
+          <ul>
+            <li><a href="#">Pix</a></li>
+            <li><a href="#">Cartão de crédito</a></li>
+            <li><a href="#">Boleto</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Redes Sociais</h3>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 TechStore. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="assertive">
+      <span class="toast-icone">&#10003;</span>
+      <span id="toastMensagem">Produto adicionado ao carrinho!</span>
+    </div>
+
+    <script>
+      const produtos = [
+        {
+          id: 1,
+          nome: "iPhone 15 Pro 256GB Titânio Natural",
+          categoria: "smartphones",
+          preco: 8499,
+          precoAntigo: 9999,
+          desconto: 15,
+          parcelas: 12,
+          avaliacao: 4.8,
+          avaliacoes: 2341,
+          emoji: "📱",
+        },
+        {
+          id: 2,
+          nome: "Samsung Galaxy S24 Ultra 512GB",
+          categoria: "smartphones",
+          preco: 7299,
+          precoAntigo: 8499,
+          desconto: 14,
+          parcelas: 12,
+          avaliacao: 4.7,
+          avaliacoes: 1876,
+          emoji: "📱",
+        },
+        {
+          id: 3,
+          nome: 'MacBook Air M3 13" 16GB/512GB',
+          categoria: "notebooks",
+          preco: 11299,
+          precoAntigo: 13499,
+          desconto: 16,
+          parcelas: 18,
+          avaliacao: 4.9,
+          avaliacoes: 987,
+          emoji: "💻",
+        },
+        {
+          id: 4,
+          nome: "Dell XPS 15 Intel i7 RTX 4060",
+          categoria: "notebooks",
+          preco: 9799,
+          precoAntigo: 11299,
+          desconto: 13,
+          parcelas: 18,
+          avaliacao: 4.6,
+          avaliacoes: 543,
+          emoji: "💻",
+        },
+        {
+          id: 5,
+          nome: "AirPods Pro 2ª Geração MagSafe",
+          categoria: "audio",
+          preco: 1799,
+          precoAntigo: 2299,
+          desconto: 22,
+          parcelas: 6,
+          avaliacao: 4.8,
+          avaliacoes: 4521,
+          emoji: "🎧",
+        },
+        {
+          id: 6,
+          nome: "Sony WH-1000XM5 Noise Canceling",
+          categoria: "audio",
+          preco: 1499,
+          precoAntigo: 1999,
+          desconto: 25,
+          parcelas: 6,
+          avaliacao: 4.7,
+          avaliacoes: 3102,
+          emoji: "🎧",
+        },
+        {
+          id: 7,
+          nome: 'Smart TV Samsung 65" QLED 4K',
+          categoria: "tvs",
+          preco: 4299,
+          precoAntigo: 5499,
+          desconto: 22,
+          parcelas: 12,
+          avaliacao: 4.6,
+          avaliacoes: 1234,
+          emoji: "📺",
+        },
+        {
+          id: 8,
+          nome: 'LG OLED 55" G4 4K 120Hz',
+          categoria: "tvs",
+          preco: 6499,
+          precoAntigo: 7999,
+          desconto: 19,
+          parcelas: 12,
+          avaliacao: 4.9,
+          avaliacoes: 876,
+          emoji: "📺",
+        },
+      ];
+
+      let carrinho = 0;
+
+      function formatarPreco(v) {
+        return v.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        });
+      }
+      function gerarEstrelas(n) {
+        return "★".repeat(Math.floor(n)) + (n % 1 >= 0.5 ? "½" : "");
+      }
+
+      function renderizarProdutos(filtro = "todos") {
+        const grid = document.getElementById("produtosGrid");
+        const lista =
+          filtro === "todos"
+            ? produtos
+            : produtos.filter((p) => p.categoria === filtro);
+        grid.innerHTML = "";
+        lista.forEach((p) => {
+          const art = document.createElement("article");
+          art.className = "produto-card";
+          art.setAttribute("aria-label", p.nome);
+          art.innerHTML = `
+          <span class="produto-badge" aria-label="${p.desconto}% de desconto">-${p.desconto}%</span>
+          <div class="produto-imagem" aria-hidden="true">${p.emoji}</div>
+          <div class="produto-info">
+            <h3 class="produto-nome">${p.nome}</h3>
+            <div class="produto-avaliacao">
+              <span class="estrelas" aria-label="Nota ${p.avaliacao}">${gerarEstrelas(p.avaliacao)}</span>
+              <span>(${p.avaliacoes.toLocaleString("pt-BR")})</span>
+            </div>
+            <p class="produto-preco-antigo">${formatarPreco(p.precoAntigo)}</p>
+            <p class="produto-preco">${formatarPreco(p.preco)}</p>
+            <p class="produto-parcelas">em ${p.parcelas}x de ${formatarPreco(p.preco / p.parcelas)} sem juros</p>
+            <button class="btn-adicionar" data-nome="${p.nome}">Adicionar ao carrinho</button>
+          </div>`;
+          grid.appendChild(art);
+        });
+        grid.querySelectorAll(".btn-adicionar").forEach((btn) => {
+          btn.addEventListener("click", () =>
+            adicionarAoCarrinho(btn.dataset.nome),
+          );
+        });
+      }
+
+      function adicionarAoCarrinho(nome) {
+        carrinho++;
+        const badge = document.getElementById("badgeCarrinho");
+        badge.textContent = carrinho;
+        badge.classList.add("animar");
+        setTimeout(() => badge.classList.remove("animar"), 400);
+        exibirToast(`"${nome.slice(0, 30)}..." adicionado!`);
+      }
+
+      let toastTimer;
+      function exibirToast(msg) {
+        const t = document.getElementById("toast");
+        document.getElementById("toastMensagem").textContent = msg;
+        t.classList.add("visivel");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.remove("visivel"), 3000);
+      }
+
+      document.querySelectorAll(".filtro-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelector(".filtro-btn.ativo").classList.remove("ativo");
+          btn.classList.add("ativo");
+          renderizarProdutos(btn.dataset.filtro);
+        });
+      });
+
+      const sugestoesDados = [
+        "iPhone 15 Pro",
+        "Samsung Galaxy S24",
+        "MacBook Air M3",
+        "AirPods Pro",
+        "Smart TV 4K",
+        "Notebook Dell",
+        "Sony WH-1000XM5",
+        "iPad Pro",
+        "Apple Watch",
+        "Xiaomi Redmi Note",
+      ];
+      const campoBusca = document.getElementById("campoBusca");
+      const listaSugestoes = document.getElementById("listaSugestoes");
+      let debounceTimer;
+      campoBusca.addEventListener("input", () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          const t = campoBusca.value.trim().toLowerCase();
+          if (t.length < 2) {
+            listaSugestoes.classList.remove("visivel");
+            return;
+          }
+          const f = sugestoesDados.filter((s) => s.toLowerCase().includes(t));
+          if (!f.length) {
+            listaSugestoes.classList.remove("visivel");
+            return;
+          }
+          listaSugestoes.innerHTML = "";
+          f.slice(0, 5).forEach((s) => {
+            const li = document.createElement("li");
+            li.textContent = s;
+            li.setAttribute("role", "option");
+            li.addEventListener("click", () => {
+              campoBusca.value = s;
+              listaSugestoes.classList.remove("visivel");
+            });
+            listaSugestoes.appendChild(li);
+          });
+          listaSugestoes.classList.add("visivel");
+        }, 250);
+      });
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".busca"))
+          listaSugestoes.classList.remove("visivel");
+      });
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          document
+            .getElementById("cabecalho")
+            .classList.toggle("scrolled", window.scrollY > 10);
+        },
+        { passive: true },
+      );
+
+      const menuToggle = document.getElementById("menuToggle");
+      menuToggle.addEventListener("click", () => {
+        const aberto = document
+          .getElementById("navInner")
+          .classList.toggle("visivel");
+        document.getElementById("busca").classList.toggle("visivel", aberto);
+        menuToggle.setAttribute("aria-expanded", aberto);
+      });
+
+      function iniciarContador() {
+        const fim = new Date();
+        fim.setHours(23, 59, 59, 0);
+        function atualizar() {
+          let d = Math.max(0, fim - new Date());
+          const h = Math.floor(d / 3600000);
+          d %= 3600000;
+          const m = Math.floor(d / 60000);
+          d %= 60000;
+          const s = Math.floor(d / 1000);
+          document.getElementById("ctHoras").textContent = String(h).padStart(
+            2,
+            "0",
+          );
+          document.getElementById("ctMinutos").textContent = String(m).padStart(
+            2,
+            "0",
+          );
+          document.getElementById("ctSegundos").textContent = String(
+            s,
+          ).padStart(2, "0");
+        }
+        atualizar();
+        setInterval(atualizar, 1000);
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.style.opacity = "1";
+              e.target.style.transform = "translateY(0)";
+              observer.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      renderizarProdutos();
+      iniciarContador();
+      document
+        .querySelectorAll(".produto-card, .categoria-card")
+        .forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(20px)";
+          el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+          observer.observe(el);
+        });
+    </script>
+  </body>
+</html>
